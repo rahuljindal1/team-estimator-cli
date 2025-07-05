@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  team_estimator:
+    build: .
+    container_name: team_estimator_cli
+    tty: true
+    stdin_open: true
+    volumes:
+      - ./team-estimator:/app/team-estimator
+
