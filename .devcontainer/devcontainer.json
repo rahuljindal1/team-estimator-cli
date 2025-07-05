@@ -12,5 +12,6 @@
         "ms-python.python"
       ]
     }
-  }
+  },
+  "postCreateCommand": "bash /home/workspace/init.sh"
 }

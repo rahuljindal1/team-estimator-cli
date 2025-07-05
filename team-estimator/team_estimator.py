@@ -1,8 +1,3 @@
-#!/usr/bin/env python3
-
-from itertools import product
-from class_argparse import ClassArgParser # type: ignore
-
 class TeamOptimizer:
     def __init__(self):
         pass
@@ -20,7 +15,7 @@ class TeamOptimizer:
         total_qa: int,
         total_designers: int,
         effective_utilization: float,
-        buffer_percentage: float
+        buffer_percentage: float,
     ):
         """
         Calculate optimal team size for given project effort.
@@ -66,7 +61,7 @@ class TeamOptimizer:
             For example, 0.2 adds 20% more effort to the estimated man-hours.
         """
         # Increase required effort by buffer to safeguard against risks
-        man_hours_required *= (1 + buffer_percentage)
+        man_hours_required *= 1 + buffer_percentage
 
         hours_per_month_per_dev = work_days_per_month * hours_per_day
         total_hours_per_dev = hours_per_month_per_dev * duration_months
@@ -81,24 +76,37 @@ class TeamOptimizer:
                 ) * total_hours_per_dev
 
                 if total_effective_hours >= man_hours_required:
-                    if (not best_combo or
-                        seniors < best_combo['seniors'] or
-                        (seniors == best_combo['seniors'] and juniors < best_combo['juniors'])):
+                    if (
+                        not best_combo
+                        or seniors < best_combo["seniors"]
+                        or (
+                            seniors == best_combo["seniors"]
+                            and juniors < best_combo["juniors"]
+                        )
+                    ):
                         best_combo = {
-                            'seniors': seniors,
-                            'juniors': juniors,
-                            'capacity': total_effective_hours
+                            "seniors": seniors,
+                            "juniors": juniors,
+                            "capacity": total_effective_hours,
                         }
 
         if best_combo:
-            print(f"\n✅ Optimal team for {int(man_hours_required)} man-hours in {duration_months} months "
-                f"(incl. {int(buffer_percentage*100)}% buffer, {int(effective_utilization*100)}% utilization):")
-            print(f"  Developers: {best_combo['seniors']} seniors, {best_combo['juniors']} juniors")
+            print(
+                f"\n✅ Optimal team for {int(man_hours_required)} man-hours in {duration_months} months "
+                f"(incl. {int(buffer_percentage * 100)}% buffer, {int(effective_utilization * 100)}% utilization):"
+            )
+            print(
+                f"  Developers: {best_combo['seniors']} seniors, {best_combo['juniors']} juniors"
+            )
             print(f"  QA: {total_qa} (does not add capacity)")
             print(f"  Designers: {total_designers} (does not add capacity)")
-            print(f"  ➜ Total effective dev capacity: {int(best_combo['capacity'])} man-hours")
+            print(
+                f"  ➜ Total effective dev capacity: {int(best_combo['capacity'])} man-hours"
+            )
         else:
-            print("\n❌ No feasible team found under given constraints. Increase duration or role caps.")
+            print(
+                "\n❌ No feasible team found under given constraints. Increase duration or role caps."
+            )
 
     def calculate_weeks_needed(
         self,
@@ -109,13 +117,16 @@ class TeamOptimizer:
         days_per_week: int,
         senior_productivity_factor: float,
         effective_utilization: float,
-        buffer_percentage: float
+        buffer_percentage: float,
     ):
-        man_hours_required *= (1 + buffer_percentage)
+        man_hours_required *= 1 + buffer_percentage
 
         total_weekly_capacity = (
-            (total_seniors * senior_productivity_factor) + total_juniors
-        ) * hours_per_day * days_per_week * effective_utilization
+            ((total_seniors * senior_productivity_factor) + total_juniors)
+            * hours_per_day
+            * days_per_week
+            * effective_utilization
+        )
 
         if total_weekly_capacity <= 0:
             print("\n❌ Invalid team config — no capacity.")
@@ -123,8 +134,12 @@ class TeamOptimizer:
 
         weeks_needed = man_hours_required / total_weekly_capacity
 
-        print(f"\n✅ Estimated delivery for fixed team (incl. {int(buffer_percentage * 100)}% buffer, {int(effective_utilization * 100)}% utilization):")
+        print(
+            f"\n✅ Estimated delivery for fixed team (incl. {int(buffer_percentage * 100)}% buffer, {int(effective_utilization * 100)}% utilization):"
+        )
         print(f"  Seniors: {total_seniors}")
         print(f"  Juniors: {total_juniors}")
         print(f"  ➜ Weekly dev capacity: {int(total_weekly_capacity)} man-hours/week")
-        print(f"  ➜ Delivery time: {weeks_needed:.1f} weeks for {int(man_hours_required)} man-hours")
+        print(
+            f"  ➜ Delivery time: {weeks_needed:.1f} weeks for {int(man_hours_required)} man-hours"
+        )

@@ -1,4 +1,4 @@
 {
-  "python.formatting.provider": "black",
+  "python.defaultInterpreterPath": "/root/.local/share/virtualenvs/team-estimator/bin/python",
   "editor.formatOnSave": true
 }

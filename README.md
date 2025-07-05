@@ -9,8 +9,8 @@ A simple Python CLI to estimate various metrics for software projects.
 
 ## How to use
 
-1. Run `docker-compose up`.
-2. Open another terminal and run `docker exec -it team_estimator_cli bash`
+1. Select Run in Container option.
+2. Run `pipenv shell`
 3. Run `python -m team-estimator <options>`
 
 ## Allowed Options

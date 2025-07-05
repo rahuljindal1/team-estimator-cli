@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
-from itertools import product
-from class_argparse import ClassArgParser # type: ignore
+from class_argparse import ClassArgParser
 
 from .team_estimator import TeamOptimizer
 
@@ -28,11 +27,6 @@ class Main(ClassArgParser):
         min_seniors = 2
         max_juniors = 12
 
-        TECH_ROLES = [
-            {'name': 'frontend', 'max_seniors': 10, 'max_juniors': 10},
-            {'name': 'backend', 'max_seniors': 10, 'max_juniors': 10}
-        ]
-
         self.team_optimizer.calculate_team_size(
             man_hours_required=man_hours_required,
             duration_months=duration_months,
@@ -45,7 +39,7 @@ class Main(ClassArgParser):
             max_seniors=max_seniors,
             min_seniors=min_seniors,
             effective_utilization=self.EFFECTIVE_UTILIZATION,
-            buffer_percentage=self.BUFFER_PERCENTAGE
+            buffer_percentage=self.BUFFER_PERCENTAGE,
         )
 
     def delivery_timeline(self):
@@ -62,7 +56,7 @@ class Main(ClassArgParser):
             days_per_week=self.DAYS_PER_WEEK,
             senior_productivity_factor=self.SENIOR_PRODUCTIVITY_FACTOR,
             effective_utilization=self.EFFECTIVE_UTILIZATION,
-            buffer_percentage=self.BUFFER_PERCENTAGE
+            buffer_percentage=self.BUFFER_PERCENTAGE,
         )
 
 
