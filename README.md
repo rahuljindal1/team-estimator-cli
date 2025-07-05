@@ -2,11 +2,6 @@
 
 A simple Python CLI to estimate various metrics for software projects.
 
-## What It Does
-
-- Calculates the minimum team needed to deliver a project in a given time.
-- Estimates how long a fixed team will take to deliver a workload.
-
 ## Pre-Requisites
 
 1. Docker
