@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.8"
 
 services:
   team_estimator:
@@ -7,5 +7,9 @@ services:
     tty: true
     stdin_open: true
     volumes:
-      - .:/app/
-
+      # Mount SSH Keys as readonly
+      - ~/.ssh:/root/.ssh:ro
+      # Mount gitconfig
+      - ~/.gitconfig:/root/.gitconfig:ro
+      # Mount working folder
+      - ./:/home/workspace
