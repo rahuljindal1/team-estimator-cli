@@ -1,9 +1,11 @@
 FROM python:3.12
 
+RUN pip install pipenv
+
 WORKDIR /app
 
-COPY team_estimator.py .
+COPY . .
 
-RUN pip install class-argparse
+RUN pipenv install
 
 ENTRYPOINT ["/bin/bash"]

@@ -7,5 +7,5 @@ services:
     tty: true
     stdin_open: true
     volumes:
-      - ./team-estimator:/app/team-estimator
+      - .:/app/
 
